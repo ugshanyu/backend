@@ -24,6 +24,16 @@ impl Role {
             colour: self.colour,
             hoist: Some(self.hoist),
             rank: Some(self.rank),
+            cost: self.cost,
+            role_requestable: self.role_requestable,
+            info_required: self.info_required,
+            payment_required: self.payment_required,
+            approvement_required: self.approvement_required,
+            duration: self.duration,
+            duration_type: self.duration_type,
+            approval_roles: self.approval_roles,
+            fields: self.fields,
+            expires: self.expires,
         }
     }
 

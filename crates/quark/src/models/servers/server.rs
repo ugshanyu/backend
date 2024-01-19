@@ -11,20 +11,14 @@ pub fn if_false(t: &bool) -> bool {
     !t
 }
 
-/// Representation of a server role
 #[derive(Serialize, Deserialize, JsonSchema, Debug, Clone, OptionalStruct, Default)]
 #[optional_derive(Serialize, Deserialize, JsonSchema, Debug, Clone, Default)]
 #[optional_name = "PartialRole"]
 #[opt_skip_serializing_none]
 #[opt_some_priority]
 pub struct Role {
-    /// Role name
     pub name: String,
-    /// Permissions available to this role
     pub permissions: OverrideField,
-    /// Colour used for this role
-    ///
-    /// This can be any valid CSS colour
     #[serde(skip_serializing_if = "Option::is_none")]
     pub colour: Option<String>,
     /// Whether this role should be shown separately on the member sidebar
@@ -33,6 +27,27 @@ pub struct Role {
     /// Ranking of this role
     #[serde(default)]
     pub rank: i64,
+    //role_requestable
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub role_requestable: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub cost: Option<i64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub info_required: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub payment_required: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub approvement_required: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub expires: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub duration: Option<i64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub duration_type: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub approval_roles: Option<Vec<String>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub fields: Option<HashMap<String, (String, String)>>,
 }
 
 /// Channel category

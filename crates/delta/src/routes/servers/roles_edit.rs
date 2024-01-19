@@ -10,6 +10,7 @@ use revolt_quark::{
 
 use rocket::serde::json::Json;
 use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
 use validator::Validate;
 
 /// # Role Data
@@ -30,6 +31,34 @@ pub struct DataEditRole {
     /// Fields to remove from role object
     #[validate(length(min = 1))]
     remove: Option<Vec<FieldsRole>>,
+
+    ///role_requestable
+    role_requestable: Option<bool>,
+
+    /// Info required flag
+    info_required: Option<bool>,
+
+    /// Payment required flag
+    payment_required: Option<bool>,
+
+    /// Approvement required flag
+    approvement_required: Option<bool>,
+
+    /// Whether the role expires
+    expires: Option<bool>,
+
+    // /// Cost
+    cost: Option<i64>,
+    // /// Duration
+    duration: Option<i64>,
+    /// Duration type (e.g., months, years)
+    duration_type: Option<String>,
+
+    /// Approval roles
+    approval_roles: Option<Vec<String>>,
+
+    /// Custom fields (name, value name, field type)
+    fields: Option<HashMap<String, (String, String)>>,
 }
 
 /// # Edit Role
@@ -64,6 +93,17 @@ pub async fn req(
             hoist,
             rank,
             remove,
+            cost,
+            //add reamining fields
+            role_requestable,
+            info_required,
+            payment_required,
+            approvement_required,
+            expires,
+            duration,
+            duration_type,
+            approval_roles,
+            fields,
         } = data;
 
         if let Some(rank) = &rank {
@@ -77,6 +117,16 @@ pub async fn req(
             colour,
             hoist,
             rank,
+            cost,
+            info_required,
+            payment_required,
+            role_requestable,
+            approvement_required,
+            expires,
+            duration,
+            duration_type,
+            approval_roles,
+            fields,
             ..Default::default()
         };
 
